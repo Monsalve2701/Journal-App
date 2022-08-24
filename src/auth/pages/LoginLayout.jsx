@@ -8,7 +8,7 @@ const LoginLayout = ({ isCheckingAuth, onGoogleSignIn, onSubmit, onInputChange, 
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={ onSubmit }>
         <Grid container sx={{ mt: 2 }}>
           <Grid item>
             <TextField

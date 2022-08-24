@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMemo } from "react";
 import LoginLayout from "./LoginLayout";
 import { useForm } from "../../hooks/useForm";
+import { signInUserPass } from "../../firebase/config";
 
 export const LoginPage = () => {
 
@@ -19,9 +20,8 @@ export const LoginPage = () => {
   });
 
   const onSubmit = () => {
-    e.preventDefault();
-
-    dispach(checkingAuthentication(email, password));
+    event.preventDefault();
+    signInUserPass( email , password)
   };
 
   const onGoogleSignIn = () => {
@@ -34,7 +34,7 @@ export const LoginPage = () => {
       onInputChange= { onInputChange }
       isCheckingAuth={isCheckingAuth}
       onGoogleSignIn={onGoogleSignIn}
-      onSubmit={onSubmit}
+      onSubmit={ onSubmit }
       email ={ email }
       password ={ password }
     />

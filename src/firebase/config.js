@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth"
 import { getFirestore } from "firebase/firestore/lite"
 
 const firebaseConfig = {
@@ -45,11 +45,25 @@ export const registerWithEmailPassword = async ({ fullname, email, password }) =
         const resp = await createUserWithEmailAndPassword( FirebaseAuth, email, password )
         const { uid, photoURL } = resp.user
         console.log(resp)
+
+        updateProfile( FirebaseAuth.currentUser, {
+            displayName: fullname,
+        } )
+
+        return {
+            ok: true, 
+            uid, photoURL , email , fullname
+        }
         
     } catch (error) {
 
         return{ ok: false , errorMessage: error.message }
 
     }
+}
+
+export const signInUserPass = async( email , password ) => {
+    const resp = await signInWithEmailAndPassword( FirebaseAuth, email , password )
+    console.log(resp)
 }
 

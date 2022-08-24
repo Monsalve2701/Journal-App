@@ -22,10 +22,15 @@ export const startGoogleSignIn = () => {
     }
 }
 
-export const startCreatinWithEmailPassword = ({ email, password, fullname }) => {
+export const startCreatinWithEmailPassword = ({ email , fullname , password }) => {
     return async( dispach ) => {
+
         dispach( checkingCredentials() )
         const resp = await registerWithEmailPassword({ email, password, fullname })
-        console.log(resp)
+        const { ok , uid , photoURL , errorMessage , } = resp
+        if( !ok ) return dispach( logout({errorMessage}) )
+
+        dispach( login({ uid , photoURL , email }))
     }
 }
+
